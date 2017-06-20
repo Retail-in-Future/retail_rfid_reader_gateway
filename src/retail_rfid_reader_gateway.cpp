@@ -4,11 +4,14 @@
 #include <util/logging/ConsoleLogSystem.hpp>
 #include <ClientCore.hpp>
 
+using namespace std;
+using namespace awsiotsdk::util::Logging;
+
 int main(int argc, char *argv[])
 {
-    std::shared_ptr<awsiotsdk::util::Logging::ConsoleLogSystem> p_log_system =
-        std::make_shared<awsiotsdk::util::Logging::ConsoleLogSystem>(awsiotsdk::util::Logging::LogLevel::Info);
-    awsiotsdk::util::Logging::InitializeAWSLogging(p_log_system);
-    awsiotsdk::util::Logging::ShutdownAWSLogging();
+    shared_ptr<ConsoleLogSystem> p_log_system =
+        make_shared<ConsoleLogSystem>(LogLevel::Info);
+    InitializeAWSLogging(p_log_system);
+    ShutdownAWSLogging();
     return 0;
 }
