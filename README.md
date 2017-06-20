@@ -1,6 +1,5 @@
-autotools_project_template
+retail_rfid_reader_gateway
 ==================
 
-This Autotools Project Template aims to create a skeleton for usage on [Autotools Project Builder](https://github.com/TangCheng/autotools_project_builder)
-
+The gateway between device of rfid and AWS IoT cloud.
 
