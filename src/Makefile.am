@@ -45,13 +45,16 @@ retail_rfid_reader_gateway_SOURCES = \
 	retail_rfid_reader_gateway.cpp
 
 retail_rfid_reader_gateway_CFLAGS = $(AM_CFLAGS)
-#retail_rfid_reader_gateway_CPPFLAGS = $(BOOST_CPPFLAGS)
+retail_rfid_reader_gateway_CPPFLAGS = $(AWS_IOT_CPPFLAGS)
+#retail_rfid_reader_gateway_CPPFLAGS += $(BOOST_CPPFLAGS)
 retail_rfid_reader_gateway_CXXFLAGS = $(AM_CXXFLAGS)
 
 retail_rfid_reader_gateway_LDFLAGS = $(AM_LDFLAGS)
+retail_rfid_reader_gateway_LDFLAGS += $(AWS_IOT_LDFLAGS)
 #retail_rfid_reader_gateway_LDFLAGS += $(BOOST_*_LDFLAGS)
 
 retail_rfid_reader_gateway_LDADD = $(DEPENDENCIES_LIBS)
+retail_rfid_reader_gateway_LDADD += $(AWS_IOT_LIBS)
 #retail_rfid_reader_gateway_LDADD += $(BOOST_*_LIBS)
 
 if ENABLE_TESTS
