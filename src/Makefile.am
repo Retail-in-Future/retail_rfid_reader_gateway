@@ -21,12 +21,14 @@ lib_LTLIBRARIES = libretail_rfid_reader_gateway.la
 libretail_rfid_reader_gateway_la_SOURCES = \
 	retail_rfid_reader_gateway.cpp
 
+libretail_rfid_reader_gateway_la_CPPFLAGS = $(AWS_IOT_CPPFLAGS)
 #libretail_rfid_reader_gateway_la_CPPFLAGS = $(BOOST_CPPFLAGS)
 
-libretail_rfid_reader_gateway_la_LDFLAGS = 
+libretail_rfid_reader_gateway_la_LDFLAGS = $(AWS_IOT_LDFLAGS) 
 #libretail_rfid_reader_gateway_la_LDFLAGS += $(BOOST_*_LDFLAGS)
 
 libretail_rfid_reader_gateway_la_LIBADD = $(DEPENDENCIES_LIBS)
+libretail_rfid_reader_gateway_la_LIBADD += $(AWS_IOT_LIBS)
 #libretail_rfid_reader_gateway_la_LIBADD += $(BOOST_*_LIBS)
 
 libretail_rfid_reader_gateway_la_include_HEADERS = \
