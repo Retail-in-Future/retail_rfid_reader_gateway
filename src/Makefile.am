@@ -22,7 +22,7 @@ libretail_rfid_reader_gateway_la_SOURCES = \
 	retail_rfid_reader_gateway.cpp
 
 libretail_rfid_reader_gateway_la_CPPFLAGS = $(AWS_IOT_CPPFLAGS)
-#libretail_rfid_reader_gateway_la_CPPFLAGS = $(BOOST_CPPFLAGS)
+libretail_rfid_reader_gateway_la_CPPFLAGS += $(BOOST_CPPFLAGS)
 
 libretail_rfid_reader_gateway_la_LDFLAGS = $(AWS_IOT_LDFLAGS) 
 #libretail_rfid_reader_gateway_la_LDFLAGS += $(BOOST_*_LDFLAGS)
@@ -48,7 +48,7 @@ retail_rfid_reader_gateway_SOURCES = \
 
 retail_rfid_reader_gateway_CFLAGS = $(AM_CFLAGS)
 retail_rfid_reader_gateway_CPPFLAGS = $(AWS_IOT_CPPFLAGS)
-#retail_rfid_reader_gateway_CPPFLAGS += $(BOOST_CPPFLAGS)
+retail_rfid_reader_gateway_CPPFLAGS += $(BOOST_CPPFLAGS)
 retail_rfid_reader_gateway_CXXFLAGS = $(AM_CXXFLAGS)
 
 retail_rfid_reader_gateway_LDFLAGS = $(AM_LDFLAGS)
