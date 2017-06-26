@@ -19,10 +19,10 @@ TEST_GROUP(parameters_group)
 TEST(parameters_group, should_get_parameters_when_given_valid_conf_file)
 {
     auto param = make_shared<Parameters>("../conf/retail_rfid_reader_gateway.conf");
-    std::string actual_aws_ipaddr = param->get<std::string>("conf.aws_iot.ipaddr");
+    std::string actual_aws_ipaddr = param->get<std::string>(PARAM::AWS_IOT_IPADDR);
     std::string expected_aws_ipaddr = "10.0.0.1";
     CHECK(expected_aws_ipaddr == actual_aws_ipaddr);
-    int actual_aws_port = param->get<int>("conf.aws_iot.port");
+    int actual_aws_port = param->get<int>(PARAM::AWS_IOT_PORT);
     int expected_aws_port = 1980;
     LONGS_EQUAL(expected_aws_port, actual_aws_port);
 }

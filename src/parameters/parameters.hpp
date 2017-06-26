@@ -3,11 +3,19 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/utility/string_ref.hpp>
+#include <boost/serialization/singleton.hpp>
 
 using namespace boost;
 using namespace boost::property_tree;
+using namespace boost::serialization;
 
-class Parameters
+namespace PARAM
+{
+    static const std::string AWS_IOT_IPADDR = "conf.aws_iot.ipaddr";
+    static const std::string AWS_IOT_PORT = "conf.aws_iot.port";
+};
+
+class Parameters: public singleton<Parameters>
 {
     private:
         ptree m_conf_tree;
