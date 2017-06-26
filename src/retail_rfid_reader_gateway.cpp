@@ -5,15 +5,18 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/foreach.hpp>
+#include <boost/core/ignore_unused.hpp>
 
 using namespace std;
 using namespace awsiotsdk::util::Logging;
+using namespace boost;
 using namespace boost::property_tree;
 
 int main(int argc, char *argv[])
 {
-    shared_ptr<ConsoleLogSystem> p_log_system =
-        make_shared<ConsoleLogSystem>(LogLevel::Info);
+    ignore_unused(argc, argv);
+    std::shared_ptr<ConsoleLogSystem> p_log_system =
+        std::make_shared<ConsoleLogSystem>(LogLevel::Info);
     InitializeAWSLogging(p_log_system);
     ShutdownAWSLogging();
     ptree pt;
