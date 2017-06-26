@@ -14,7 +14,7 @@ LT_INIT
 
 BOOST_REQUIRE
 #PKG_CHECK_MODULES(DEPENDENCIES, [])
-#AC_CONFIG_LINKS([file:file])
+AC_CONFIG_LINKS([conf/retail_rfid_reader_gateway.conf:conf/retail_rfid_reader_gateway.conf])
 
 AWS_IOT_SDK_CPP_REQUIRE
 
