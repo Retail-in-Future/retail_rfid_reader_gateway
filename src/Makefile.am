@@ -1,3 +1,5 @@
+AUTOMAKE_OPTIONS = subdir-objects
+
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
@@ -19,12 +21,19 @@ libretail_rfid_reader_gateway_la_includedir = $(includedir)/retail_rfid_reader_g
 lib_LTLIBRARIES = libretail_rfid_reader_gateway.la
 
 libretail_rfid_reader_gateway_la_SOURCES = \
-	retail_rfid_reader_gateway.cpp
+	retail_rfid_reader_gateway.cpp \
+	parameters/parameters.cpp
 
-libretail_rfid_reader_gateway_la_CPPFLAGS = $(AWS_IOT_CPPFLAGS)
+libretail_rfid_reader_gateway_la_CFLAGS = $(AM_CFLAGS)
+
+libretail_rfid_reader_gateway_la_CXXFLAGS = $(AM_CXXFLAGS)
+
+libretail_rfid_reader_gateway_la_CPPFLAGS = $(AM_CPPFLAGS)
+libretail_rfid_reader_gateway_la_CPPFLAGS += $(AWS_IOT_CPPFLAGS)
 libretail_rfid_reader_gateway_la_CPPFLAGS += $(BOOST_CPPFLAGS)
 
-libretail_rfid_reader_gateway_la_LDFLAGS = $(AWS_IOT_LDFLAGS) 
+libretail_rfid_reader_gateway_la_LDFLAGS = $(AM_LDFLAGS)
+libretail_rfid_reader_gateway_la_LDFLAGS += $(AWS_IOT_LDFLAGS) 
 #libretail_rfid_reader_gateway_la_LDFLAGS += $(BOOST_*_LDFLAGS)
 
 libretail_rfid_reader_gateway_la_LIBADD = $(DEPENDENCIES_LIBS)
@@ -44,12 +53,16 @@ endif
 bin_PROGRAMS = retail_rfid_reader_gateway
 
 retail_rfid_reader_gateway_SOURCES = \
-	retail_rfid_reader_gateway.cpp
+	retail_rfid_reader_gateway.cpp \
+	parameters/parameters.cpp
 
 retail_rfid_reader_gateway_CFLAGS = $(AM_CFLAGS)
-retail_rfid_reader_gateway_CPPFLAGS = $(AWS_IOT_CPPFLAGS)
-retail_rfid_reader_gateway_CPPFLAGS += $(BOOST_CPPFLAGS)
+
 retail_rfid_reader_gateway_CXXFLAGS = $(AM_CXXFLAGS)
+
+retail_rfid_reader_gateway_CPPFLAGS = $(AM_CPPFLAGS)
+retail_rfid_reader_gateway_CPPFLAGS += $(AWS_IOT_CPPFLAGS)
+retail_rfid_reader_gateway_CPPFLAGS += $(BOOST_CPPFLAGS)
 
 retail_rfid_reader_gateway_LDFLAGS = $(AM_LDFLAGS)
 retail_rfid_reader_gateway_LDFLAGS += $(AWS_IOT_LDFLAGS)

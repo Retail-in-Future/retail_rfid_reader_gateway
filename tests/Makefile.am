@@ -1,3 +1,5 @@
+AUTOMAKE_OPTIONS = subdir-objects
+
 noinst_PROGRAMS = $(TEST_PROGS)
 
 PRODUCTION_CODE_INCLUDES = -I$(top_srcdir)/src
@@ -16,7 +18,19 @@ AM_CXXFLAGS += -std=c++11
 
 TEST_PROGS = retail_rfid_reader_gateway_tests
 
-retail_rfid_reader_gateway_tests_SOURCES = retail_rfid_reader_gateway_tests.cpp
+retail_rfid_reader_gateway_tests_SOURCES = \
+	retail_rfid_reader_gateway_tests.cpp \
+	parameters/parameters_tests.cpp
+
+retail_rfid_reader_gateway_tests_CFLAGS = $(AM_CFLAGS)
+
+retail_rfid_reader_gateway_tests_CXXFLAGS = $(AM_CXXFLAGS)
+
+retail_rfid_reader_gateway_tests_CPPFLAGS = $(AM_CPPFLAGS)
+retail_rfid_reader_gateway_tests_CPPFLAGS += $(BOOST_CPPFLAGS)
+
+retail_rfid_reader_gateway_tests_LDFLAGS = $(AM_LDFLAGS)
+
 retail_rfid_reader_gateway_tests_LDADD = $(CPPUTEST_LIBS)\
 	$(PRODUCTION_CODE_LIBS)
 
