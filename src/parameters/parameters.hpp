@@ -49,7 +49,6 @@ namespace PARAM
             static const int DEFAULT_STOPBITS = 1;
         }
     }
-
 };
 
 class Parameters: public singleton<Parameters>

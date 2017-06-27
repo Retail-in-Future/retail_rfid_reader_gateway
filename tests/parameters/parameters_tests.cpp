@@ -143,7 +143,7 @@ TEST(parameters_group, should_get_default_rfid_reader_rs232_stopbits_when_give_i
 
 TEST(parameters_group, should_catch_exception_when_give_invalide_item_path)
 {
-    CHECK_THROWS(boost::exception, param->get<std::string>(invalid_conf_item));
+    CHECK_THROWS(ptree_bad_path, param->get<std::string>(invalid_conf_item));
 }
 
 TEST(parameters_group, should_get_new_value_when_override_old_value)
