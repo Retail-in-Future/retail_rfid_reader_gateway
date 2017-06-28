@@ -32,6 +32,9 @@ TEST(parameters_group, should_get_parameters_when_given_valid_conf_file)
     int actual_port = param->get<int>(PARAM::AWS_IOT::PORT);
     int expected_port = PARAM::AWS_IOT::DEFAULT_PORT;
     LONGS_EQUAL(expected_port, actual_port);
+    string actual_parity = param->get<string>(PARAM::RFID_READER::RS232::PARITY);
+    string expected_parity = PARAM::RFID_READER::RS232::DEFAULT_PARITY;
+    CHECK(expected_parity == actual_parity);
 }
 
 TEST(parameters_group, should_get_default_aws_iot_ipaddr_when_give_invalid_conf_file)
