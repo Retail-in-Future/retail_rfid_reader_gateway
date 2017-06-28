@@ -103,3 +103,21 @@ TEST(options_group, should_get_multiple_conf_items_when_given_more_than_one)
     CHECK(actual_conf_pairs.size() == 2);
 }
 
+TEST(options_group, should_get_conf_value_included_equalmarks_when_give_it_by_option)
+{
+    int argc = 3;
+    char const *argv[3] = {
+        "fake_program_name",
+        "-D",
+        "conf.aws_IoT.ipaddr=192.168.1.1A=B=C"
+    };
+    auto options = boost::make_shared<Options>(argc, argv);
+    vector<pair<string, Options::Value>> actual_conf_pairs = options->get_conf_pairs();
+    CHECK(actual_conf_pairs.size() == 1);
+    pair<string, Options::Value> actual_conf_pair = actual_conf_pairs.at(0);
+    string expected_conf_item = "conf.aws_iot.ipaddr";
+    string expected_conf_value = "192.168.1.1a=b=c";
+    CHECK(expected_conf_item == actual_conf_pair.first);
+    CHECK(actual_conf_pair.second.is_string());
+    CHECK(expected_conf_value == actual_conf_pair.second.s());
+}
