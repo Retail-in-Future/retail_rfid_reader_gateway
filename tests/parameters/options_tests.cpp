@@ -65,6 +65,7 @@ TEST(options_group, should_get_lowercase_string_conf_item_when_give_it_by_option
     string expected_conf_item = "conf.aws_iot.ipaddr";
     string expected_conf_value = "192.168.1.1a";
     CHECK(expected_conf_item == actual_conf_pair.first);
+    CHECK(actual_conf_pair.second.is_string());
     CHECK(expected_conf_value == actual_conf_pair.second.s());
 }
 
@@ -83,6 +84,7 @@ TEST(options_group, should_get_int_conf_item_when_give_it_by_option)
     string expected_conf_item = "conf.aws_iot.port";
     int expected_conf_value = 65535;
     CHECK(expected_conf_item == actual_conf_pair.first);
+    CHECK(actual_conf_pair.second.is_int());
     LONGS_EQUAL(expected_conf_value, actual_conf_pair.second.i());
 }
 
