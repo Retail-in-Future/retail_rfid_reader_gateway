@@ -22,7 +22,8 @@ lib_LTLIBRARIES = libretail_rfid_reader_gateway.la
 
 libretail_rfid_reader_gateway_la_SOURCES = \
 	retail_rfid_reader_gateway.cpp \
-	parameters/parameters.cpp
+	parameters/parameters.cpp \
+	parameters/options.cpp
 
 libretail_rfid_reader_gateway_la_CFLAGS = $(AM_CFLAGS)
 
@@ -34,11 +35,11 @@ libretail_rfid_reader_gateway_la_CPPFLAGS += $(BOOST_CPPFLAGS)
 
 libretail_rfid_reader_gateway_la_LDFLAGS = $(AM_LDFLAGS)
 libretail_rfid_reader_gateway_la_LDFLAGS += $(AWS_IOT_LDFLAGS) 
-#libretail_rfid_reader_gateway_la_LDFLAGS += $(BOOST_*_LDFLAGS)
+libretail_rfid_reader_gateway_la_LDFLAGS += $(BOOST_PROGRAM_OPTIONS_LDFLAGS)
 
 libretail_rfid_reader_gateway_la_LIBADD = $(DEPENDENCIES_LIBS)
 libretail_rfid_reader_gateway_la_LIBADD += $(AWS_IOT_LIBS)
-#libretail_rfid_reader_gateway_la_LIBADD += $(BOOST_*_LIBS)
+libretail_rfid_reader_gateway_la_LIBADD += $(BOOST_PROGRAM_OPTIONS_LIBS)
 
 libretail_rfid_reader_gateway_la_include_HEADERS = \
 	retail_rfid_reader_gateway.h
@@ -54,7 +55,8 @@ bin_PROGRAMS = retail_rfid_reader_gateway
 
 retail_rfid_reader_gateway_SOURCES = \
 	retail_rfid_reader_gateway.cpp \
-	parameters/parameters.cpp
+	parameters/parameters.cpp \
+	parameters/options.cpp
 
 retail_rfid_reader_gateway_CFLAGS = $(AM_CFLAGS)
 
@@ -66,11 +68,11 @@ retail_rfid_reader_gateway_CPPFLAGS += $(BOOST_CPPFLAGS)
 
 retail_rfid_reader_gateway_LDFLAGS = $(AM_LDFLAGS)
 retail_rfid_reader_gateway_LDFLAGS += $(AWS_IOT_LDFLAGS)
-#retail_rfid_reader_gateway_LDFLAGS += $(BOOST_*_LDFLAGS)
+retail_rfid_reader_gateway_LDFLAGS += $(BOOST_PROGRAM_OPTIONS_LDFLAGS)
 
 retail_rfid_reader_gateway_LDADD = $(DEPENDENCIES_LIBS)
 retail_rfid_reader_gateway_LDADD += $(AWS_IOT_LIBS)
-#retail_rfid_reader_gateway_LDADD += $(BOOST_*_LIBS)
+retail_rfid_reader_gateway_LDADD += $(BOOST_PROGRAM_OPTIONS_LIBS)
 
 if ENABLE_TESTS
 if ENABLE_COVERAGE

@@ -13,6 +13,7 @@ AC_PROG_CXX
 LT_INIT
 
 BOOST_REQUIRE
+BOOST_PROGRAM_OPTIONS
 #PKG_CHECK_MODULES(DEPENDENCIES, [])
 AC_CONFIG_LINKS([conf/retail_rfid_reader_gateway.conf:conf/retail_rfid_reader_gateway.conf])
 
