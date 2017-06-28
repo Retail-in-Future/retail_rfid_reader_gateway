@@ -1,7 +1,9 @@
 #include <iostream>
 #include "parameters.hpp"
 
-Parameters::Parameters(std::string conf_file)
+using namespace std;
+
+Parameters::Parameters(const string &conf_file)
 {
     try {
         read_xml(conf_file, _conf_tree);

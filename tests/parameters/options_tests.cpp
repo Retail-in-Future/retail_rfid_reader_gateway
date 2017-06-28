@@ -3,6 +3,7 @@
 #include <string>
 #include <CppUTest/TestHarness.h>
 
+using namespace std;
 using namespace boost;
 
 TEST_GROUP(options_group)
@@ -17,9 +18,9 @@ TEST(options_group, should_get_conf_file_path_name_from_completely_option)
         "--config",
         "config_file_name"
     };
-    auto options = make_shared<Options>(argc, argv);
-    std::string actual_config_filename = options->get_config_filename();
-    std::string expected_config_filename = "config_file_name";
+    auto options = boost::make_shared<Options>(argc, argv);
+    string actual_config_filename = options->get_config_filename();
+    string expected_config_filename = "config_file_name";
     CHECK(expected_config_filename == actual_config_filename);
 }
 
@@ -31,9 +32,9 @@ TEST(options_group, should_get_conf_file_path_name_from_shortly_option)
         "-c",
         "config_file_name"
     };
-    auto options = make_shared<Options>(argc, argv);
-    std::string actual_config_filename = options->get_config_filename();
-    std::string expected_config_filename = "config_file_name";
+    auto options = boost::make_shared<Options>(argc, argv);
+    string actual_config_filename = options->get_config_filename();
+    string expected_config_filename = "config_file_name";
     CHECK(expected_config_filename == actual_config_filename);
 }
 
@@ -43,9 +44,9 @@ TEST(options_group, should_get_default_conf_file_path_name_if_not_give_option)
     char const *argv[1] = {
         "fake_program_name"
     };
-    auto options = make_shared<Options>(argc, argv);
-    std::string actual_config_filename = options->get_config_filename();
-    std::string expected_config_filename = Options::DEFAULT_CONF_FILENAME;
+    auto options = boost::make_shared<Options>(argc, argv);
+    string actual_config_filename = options->get_config_filename();
+    string expected_config_filename = Options::DEFAULT_CONF_FILENAME;
     CHECK(expected_config_filename == actual_config_filename);
 }
 
@@ -57,12 +58,12 @@ TEST(options_group, should_get_lowercase_string_conf_item_when_give_it_by_option
         "-D",
         "conf.aws_IoT.ipaddr=192.168.1.1A"
     };
-    auto options = make_shared<Options>(argc, argv);
-    std::vector<std::pair<std::string, Options::Value>> actual_conf_pairs = options->get_conf_pairs();
+    auto options = boost::make_shared<Options>(argc, argv);
+    vector<pair<string, Options::Value>> actual_conf_pairs = options->get_conf_pairs();
     CHECK(actual_conf_pairs.size() == 1);
-    std::pair<std::string, Options::Value> actual_conf_pair = actual_conf_pairs.at(0);
-    std::string expected_conf_item = "conf.aws_iot.ipaddr";
-    std::string expected_conf_value = "192.168.1.1a";
+    pair<string, Options::Value> actual_conf_pair = actual_conf_pairs.at(0);
+    string expected_conf_item = "conf.aws_iot.ipaddr";
+    string expected_conf_value = "192.168.1.1a";
     CHECK(expected_conf_item == actual_conf_pair.first);
     CHECK(expected_conf_value == actual_conf_pair.second.s());
 }
@@ -75,11 +76,11 @@ TEST(options_group, should_get_int_conf_item_when_give_it_by_option)
         "-D",
         "conf.aws_iot.port=65535"
     };
-    auto options = make_shared<Options>(argc, argv);
-    std::vector<std::pair<std::string, Options::Value>> actual_conf_pairs = options->get_conf_pairs();
+    auto options = boost::make_shared<Options>(argc, argv);
+    vector<pair<string, Options::Value>> actual_conf_pairs = options->get_conf_pairs();
     CHECK(actual_conf_pairs.size() == 1);
-    std::pair<std::string, Options::Value> actual_conf_pair = actual_conf_pairs.at(0);
-    std::string expected_conf_item = "conf.aws_iot.port";
+    pair<string, Options::Value> actual_conf_pair = actual_conf_pairs.at(0);
+    string expected_conf_item = "conf.aws_iot.port";
     int expected_conf_value = 65535;
     CHECK(expected_conf_item == actual_conf_pair.first);
     LONGS_EQUAL(expected_conf_value, actual_conf_pair.second.i());
@@ -95,8 +96,8 @@ TEST(options_group, should_get_multiple_conf_items_when_given_more_than_one)
         "--define",
         "conf.aws_iot.ipaddr=192.168.1.1"
     };
-    auto options = make_shared<Options>(argc, argv);
-    std::vector<std::pair<std::string, Options::Value>> actual_conf_pairs = options->get_conf_pairs();
+    auto options = boost::make_shared<Options>(argc, argv);
+    vector<pair<string, Options::Value>> actual_conf_pairs = options->get_conf_pairs();
     CHECK(actual_conf_pairs.size() == 2);
 }
 
