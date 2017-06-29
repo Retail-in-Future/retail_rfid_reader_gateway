@@ -14,12 +14,32 @@ namespace PARAM
 {
     namespace AWS_IOT
     {
-        static const string IPADDR = "conf.aws_iot.ipaddr";
-        static const string DEFAULT_IPADDR = "10.0.0.1";
+        static const string HOST = "conf.aws_iot.host";
+        static const string DEFAULT_HOST = "a1j9v713o2vs6q.iot.ap-southeast-1.amazonaws.com";
         static const string PORT = "conf.aws_iot.port";
-        static const int DEFAULT_PORT = 1980;
-        static const string CERT = "conf.aws_iot.cert";
-        static const string DEFAULT_CERT = "awsiot.cert";
+        static const int DEFAULT_PORT = 8883;
+        static const string CLIENT_ID = "conf.aws_iot.client_id";
+        static const string DEFAULT_CLIENT_ID = "retail_rfid_reader";
+        static const string THING_NAME = "conf.aws_iot.thing_name";
+        static const string DEFAULT_THING_NAME = "retail_rfid_reader";
+        namespace CERTS
+        {
+            static const string ROOT_CA = "conf.aws_iot.certs.root_ca";
+            static const string DEFAULT_ROOT_CA = "certs/root-ca";
+            static const string CERT = "conf.aws_iot.certs.cert";
+            static const string DEFAULT_CERT = "certs/caa57dffa4.cert.pem";
+            static const string PRIVATE_KEY = "conf.aws_iot.certs.private_key";
+            static const string DEFAULT_PRIVATE_KEY = "certs/caa57dffa4.private.key";
+        }
+        namespace TLS
+        {
+            static const string HANDSHAKE_TIMEOUT = "conf.aws_iot.tls.handshake_timeout";
+            static const int DEFAULT_HANDSHAKE_TIMEOUT = 60000;
+            static const string READ_TIMEOUT = "conf.aws_iot.tls.read_timeout";
+            static const int DEFAULT_READ_TIMEOUT = 2000;
+            static const string WRITE_TIMEOUT = "conf.aws_iot.tls.write_timeout";
+            static const int DEFAULT_WRITE_TIMEOUT = 2000;
+        }
     }
     namespace RFID_READER
     {
@@ -57,24 +77,36 @@ class Parameters: public singleton<Parameters>
     private:
         ptree _conf_tree;
 
-        void default_value();
-
     protected:
 
     public:
         Parameters(const string &conf_file);
         ~Parameters();
 
-        template<typename T> 
-        T get(const ptree::path_type &conf_item) const
-        {
-            return _conf_tree.get<T>(conf_item);
-        }
-
         template<typename T>
         void set(const ptree::path_type &conf_item, const T &value)
         {
             _conf_tree.put(conf_item, value);
         }
+
+        string aws_iot_host() const;
+        int aws_iot_port() const;
+        string aws_iot_client_id() const;
+        string aws_iot_thing_name() const;
+        string aws_iot_certs_root_ca() const;
+        string aws_iot_certs_cert() const;
+        string aws_iot_certs_private_key() const;
+        int aws_iot_tls_handshake_timeout() const;
+        int aws_iot_tls_read_timeout() const;
+        int aws_iot_tls_write_timeout() const;
+        string rfid_reader_type() const;
+        string rfid_reader_tcp_ipaddr() const;
+        int rfid_reader_tcp_port() const;
+        int rfid_reader_tcp_heart_beat() const;
+        string rfid_reader_rs232_device() const;
+        int rfid_reader_rs232_baudrate() const;
+        int rfid_reader_rs232_databits() const;
+        string rfid_reader_rs232_parity() const;
+        int rfid_reader_rs232_stopbits() const;
 };
 
