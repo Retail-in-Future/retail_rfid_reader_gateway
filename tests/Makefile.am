@@ -10,6 +10,7 @@ AM_CPPFLAGS = \
 	$(PRODUCTION_CODE_INCLUDES)
 
 AM_CFLAGS =	-Werror\
+	-fPIC\
 	-Wall\
 	-g
 
@@ -21,7 +22,8 @@ TEST_PROGS = retail_rfid_reader_gateway_tests
 retail_rfid_reader_gateway_tests_SOURCES = \
 	retail_rfid_reader_gateway_tests.cpp \
 	parameters/parameters_tests.cpp \
-	parameters/options_tests.cpp
+	parameters/options_tests.cpp \
+	aws_iot/client_tests.cpp
 
 retail_rfid_reader_gateway_tests_CFLAGS = $(AM_CFLAGS)
 

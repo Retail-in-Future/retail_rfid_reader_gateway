@@ -7,7 +7,8 @@ AM_CPPFLAGS = \
 	$(DEPENDENCIES_CFLAGS)
 
 AM_CFLAGS =\
-	-Wextra
+	-Wextra\
+	-fPIC
 	-Werror\
 	-Wall\
 	-g
@@ -23,7 +24,9 @@ lib_LTLIBRARIES = libretail_rfid_reader_gateway.la
 libretail_rfid_reader_gateway_la_SOURCES = \
 	retail_rfid_reader_gateway.cpp \
 	parameters/parameters.cpp \
-	parameters/options.cpp
+	parameters/options.cpp \
+	aws_iot/client.cpp \
+	aws_iot/OpenSSLConnection.cpp
 
 libretail_rfid_reader_gateway_la_CFLAGS = $(AM_CFLAGS)
 
@@ -56,7 +59,9 @@ bin_PROGRAMS = retail_rfid_reader_gateway
 retail_rfid_reader_gateway_SOURCES = \
 	retail_rfid_reader_gateway.cpp \
 	parameters/parameters.cpp \
-	parameters/options.cpp
+	parameters/options.cpp \
+	aws_iot/client.cpp \
+	aws_iot/OpenSSLConnection.cpp
 
 retail_rfid_reader_gateway_CFLAGS = $(AM_CFLAGS)
 
