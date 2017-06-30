@@ -57,9 +57,7 @@ bin_PROGRAMS = retail_rfid_reader_gateway
 retail_rfid_reader_gateway_SOURCES = \
 	retail_rfid_reader_gateway.cpp \
 	parameters/parameters.cpp \
-	parameters/options.cpp \
-	aws_iot/client.cpp \
-	aws_iot/OpenSSLConnection.cpp
+	parameters/options.cpp
 
 retail_rfid_reader_gateway_CFLAGS = $(AM_CFLAGS)
 
