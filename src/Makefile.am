@@ -7,8 +7,7 @@ AM_CPPFLAGS = \
 	$(DEPENDENCIES_CFLAGS)
 
 AM_CFLAGS =\
-	-Wextra\
-	-fPIC
+	-Wextra
 	-Werror\
 	-Wall\
 	-g

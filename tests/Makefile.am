@@ -10,7 +10,6 @@ AM_CPPFLAGS = \
 	$(PRODUCTION_CODE_INCLUDES)
 
 AM_CFLAGS =	-Werror\
-	-fPIC\
 	-Wall\
 	-g
 
