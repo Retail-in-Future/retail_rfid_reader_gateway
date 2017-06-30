@@ -76,9 +76,9 @@ AC_LANG_PUSH([C++])dnl
                 LDFLAGS="-L$awsdir $LDFLAGS"
             fi
             if test -d "$awsdir/include" ; then
-                CPPFLAGS="-I$awsdir/include $CPPFLAGS"
+                CPPFLAGS="-std=c++11 -I$awsdir/include $CPPFLAGS"
             else
-                CPPFLAGS="-I$awsdir $CPPFLAGS"
+                CPPFLAGS="-std=c++11 -I$awsdir $CPPFLAGS"
             fi
         fi
 
