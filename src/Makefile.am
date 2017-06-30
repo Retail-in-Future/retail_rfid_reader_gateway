@@ -24,9 +24,7 @@ lib_LTLIBRARIES = libretail_rfid_reader_gateway.la
 libretail_rfid_reader_gateway_la_SOURCES = \
 	retail_rfid_reader_gateway.cpp \
 	parameters/parameters.cpp \
-	parameters/options.cpp \
-	aws_iot/client.cpp \
-	aws_iot/OpenSSLConnection.cpp
+	parameters/options.cpp
 
 libretail_rfid_reader_gateway_la_CFLAGS = $(AM_CFLAGS)
 
