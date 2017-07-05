@@ -234,7 +234,7 @@ TEST(parameters_group, should_get_default_rfid_reader_rs232_stopbits_when_give_i
 TEST(parameters_group, should_get_new_value_when_override_old_value)
 {
     string new_value = "192.168.1.1";
-    param->set(PARAM::AWS_IOT::HOST, new_value);
+    param->set(PARAM::AWS_IOT::HOST, std::move(new_value));
     string actual_aws_ipaddr = param->aws_iot_host();
     string expected_aws_ipaddr = new_value;
     CHECK(expected_aws_ipaddr == actual_aws_ipaddr);
