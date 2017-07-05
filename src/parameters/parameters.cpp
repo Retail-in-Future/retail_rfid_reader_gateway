@@ -21,12 +21,6 @@ string Parameters::aws_iot_host() const
             PARAM::AWS_IOT::DEFAULT_HOST);
 }
 
-int Parameters::aws_iot_port() const
-{
-    return _conf_tree.get<int>(PARAM::AWS_IOT::PORT, 
-            PARAM::AWS_IOT::DEFAULT_PORT);
-}
-
 string Parameters::aws_iot_client_id() const
 {
     return _conf_tree.get<string>(PARAM::AWS_IOT::CLIENT_ID, 
@@ -37,6 +31,31 @@ string Parameters::aws_iot_thing_name() const
 {
     return _conf_tree.get<string>(PARAM::AWS_IOT::THING_NAME, 
             PARAM::AWS_IOT::DEFAULT_THING_NAME);
+}
+
+int Parameters::aws_iot_mqtt_port() const
+{
+    return _conf_tree.get<int>(PARAM::AWS_IOT::MQTT::PORT, 
+            PARAM::AWS_IOT::MQTT::DEFAULT_PORT);
+}
+
+int Parameters::aws_iot_mqtt_command_timeout() const
+{
+    return _conf_tree.get<int>(PARAM::AWS_IOT::MQTT::COMMAND_TIMEOUT,
+            PARAM::AWS_IOT::MQTT::DEFAULT_COMMAND_TIMEOUT);
+}
+
+bool Parameters::aws_iot_mqtt_is_clean_session() const
+{
+    string is_clean_session = _conf_tree.get<string>(PARAM::AWS_IOT::MQTT::IS_CLEAN_SESSION,
+            PARAM::AWS_IOT::MQTT::DEFAULT_IS_CLEAN_SESSION);
+    return (is_clean_session == "true");
+}
+
+int Parameters::aws_iot_mqtt_alive_timeout() const
+{
+    return _conf_tree.get<int>(PARAM::AWS_IOT::MQTT::ALIVE_TIMEOUT,
+            PARAM::AWS_IOT::MQTT::DEFAULT_ALIVE_TIMEOUT);
 }
 
 string Parameters::aws_iot_certs_root_ca() const

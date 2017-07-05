@@ -26,8 +26,8 @@ TEST(parameters_group, should_get_parameters_when_given_valid_conf_file)
     string actual_host = param->aws_iot_host();
     string expected_host = PARAM::AWS_IOT::DEFAULT_HOST;
     CHECK(expected_host == actual_host);
-    int actual_port = param->aws_iot_port();
-    int expected_port = PARAM::AWS_IOT::DEFAULT_PORT;
+    int actual_port = param->aws_iot_mqtt_port();
+    int expected_port = PARAM::AWS_IOT::MQTT::DEFAULT_PORT;
     LONGS_EQUAL(expected_port, actual_port);
     string actual_parity = param->rfid_reader_rs232_parity();
     string expected_parity = PARAM::RFID_READER::RS232::DEFAULT_PARITY;
@@ -43,15 +43,6 @@ TEST(parameters_group, should_get_default_aws_iot_host_when_give_invalid_conf_fi
     CHECK(expected_host == actual_host);
 }
     
-TEST(parameters_group, should_get_default_aws_iot_port_when_give_invalid_conf_file)
-{
-    auto default_param = boost::make_shared<Parameters>(invalid_conf_file);
-
-    int actual_port = default_param->aws_iot_port();
-    int expected_port = PARAM::AWS_IOT::DEFAULT_PORT;
-    LONGS_EQUAL(expected_port, actual_port);
-}
-
 TEST(parameters_group, should_get_default_aws_iot_client_id_when_give_invalid_conf_file)
 {
     auto default_param = boost::make_shared<Parameters>(invalid_conf_file);
@@ -70,6 +61,41 @@ TEST(parameters_group, should_get_default_aws_iot_thing_name_when_give_invalid_c
     CHECK(expected_thing_name == actual_thing_name);
 }
     
+TEST(parameters_group, should_get_default_aws_iot_mqtt_port_when_give_invalid_conf_file)
+{
+    auto default_param = boost::make_shared<Parameters>(invalid_conf_file);
+
+    int actual_port = default_param->aws_iot_mqtt_port();
+    int expected_port = PARAM::AWS_IOT::MQTT::DEFAULT_PORT;
+    LONGS_EQUAL(expected_port, actual_port);
+}
+
+TEST(parameters_group, should_get_default_aws_iot_mqtt_command_timeout_when_give_invalid_conf_file)
+{
+    auto default_param = boost::make_shared<Parameters>(invalid_conf_file);
+
+    int actual_command_timeout = default_param->aws_iot_mqtt_command_timeout();
+    int expected_command_timeout = PARAM::AWS_IOT::MQTT::DEFAULT_COMMAND_TIMEOUT;
+    LONGS_EQUAL(expected_command_timeout, actual_command_timeout);
+}
+
+TEST(parameters_group, should_get_default_aws_iot_mqtt_is_clean_session_when_give_invalid_conf_file)
+{
+    auto default_param = boost::make_shared<Parameters>(invalid_conf_file);
+
+    bool actual_is_clean_session = default_param->aws_iot_mqtt_is_clean_session();
+    CHECK(actual_is_clean_session);
+}
+
+TEST(parameters_group, should_get_default_aws_iot_mqtt_alive_timeout_when_give_invalid_conf_file)
+{
+    auto default_param = boost::make_shared<Parameters>(invalid_conf_file);
+
+    int actual_alive_timeout = default_param->aws_iot_mqtt_alive_timeout();
+    int expected_alive_timeout = PARAM::AWS_IOT::MQTT::DEFAULT_ALIVE_TIMEOUT;
+    LONGS_EQUAL(expected_alive_timeout, actual_alive_timeout);
+}
+
 TEST(parameters_group, should_get_default_aws_iot_root_ca_when_give_invalid_conf_file)
 {
     auto default_param = boost::make_shared<Parameters>(invalid_conf_file);
