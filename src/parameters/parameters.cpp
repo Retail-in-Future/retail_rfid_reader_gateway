@@ -6,7 +6,7 @@ using namespace std;
 Parameters::Parameters(const string &conf_file)
 {
     try {
-        read_xml(conf_file, _conf_tree);
+        read_xml(conf_file, _conf_tree, xml_parser::no_comments);
     } catch (const xml_parser::xml_parser_error &ex) {
     }
 }
