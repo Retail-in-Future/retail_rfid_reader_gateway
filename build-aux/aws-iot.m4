@@ -107,7 +107,7 @@ AC_LANG_PUSH([C++])dnl
     fi
 AC_LANG_POP([C++])dnl
     ])
-    AWS_IOT_LIBS="-laws-iot-sdk-cpp"
+    AWS_IOT_LIBS="-laws-iot-sdk-cpp -lpthread"
     AC_SUBST(AWS_IOT_LIBS)
     if test $aws_iot_sdk_cpp_cv_path != "(system)"; then
         if test -d "$aws_iot_sdk_cpp_cv_path/lib" ; then
