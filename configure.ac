@@ -3,6 +3,7 @@ AC_INIT([retail_rfid_reader_gateway],
         [tangcheng2005@gmail.com])
 
 AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_MACRO_DIRS([build-aux])
 AC_CONFIG_AUX_DIR([build-aux])
 
 AM_INIT_AUTOMAKE([1.11])
