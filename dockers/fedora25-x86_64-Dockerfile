@@ -25,3 +25,5 @@ WORKDIR $PROJECT_PATH/aws-iot-device-sdk-cpp/build
 RUN cmake ../.
 RUN make
 RUN make install
+
+WORKDIR $PROJECT_PATH/retail_rfid_reader_gateway
