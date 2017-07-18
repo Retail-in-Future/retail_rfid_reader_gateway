@@ -22,3 +22,14 @@ bool ClientMock::mqtt_connect()
     return mock().returnValue().getBoolValue();
 }
 
+bool ClientMock::subscribe()
+{
+    mock().actualCall("subscribe").onObject(this);
+    return mock().returnValue().getBoolValue();
+}
+
+bool ClientMock::unsubscribe()
+{
+    mock().actualCall("unsubscribe").onObject(this);
+    return mock().returnValue().getBoolValue();
+}

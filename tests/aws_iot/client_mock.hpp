@@ -12,5 +12,7 @@ class ClientMock: public Client
     private:
         virtual bool initialize_tls();
         virtual bool mqtt_connect();
+        virtual bool subscribe();
+        virtual bool unsubscribe();
 };
 

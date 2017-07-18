@@ -6,6 +6,8 @@
 
 using namespace std;
 
+static const string RFID_READER_TOPIC = "rfid_reader";
+
 Client::Client(const Parameters &param) :
     _param(param)
 {
@@ -13,6 +15,7 @@ Client::Client(const Parameters &param) :
 
 Client::~Client()
 {
+    disconnect();
 }
 
 bool Client::connect()
@@ -22,8 +25,19 @@ bool Client::connect()
     result = initialize_tls();
     if (result) {
         result = mqtt_connect();
+        if (result) {
+            result = subscribe();
+        }
     }
     return result;
+}
+
+void Client::disconnect()
+{
+    if (_iot_client_ptr && _iot_client_ptr->IsConnected()) {
+        unsubscribe();
+        _iot_client_ptr->Disconnect(chrono::milliseconds(_param.aws_iot_mqtt_command_timeout()));
+    }
 }
 
 bool Client::initialize_tls()
@@ -43,7 +57,7 @@ bool Client::initialize_tls()
     rc = network_connection_ptr->Initialize();
 
     if (ResponseCode::SUCCESS != rc) {
-        //AWS_LOG_ERROR(LOG_TAG_PUBSUB,
+        //AWS_LOG_ERROR(LOG_TAG_Client,
                 //"Failed to initialize Network Connection. %s",
                 //ResponseHelper::ToString(rc).c_str());
         rc = ResponseCode::FAILURE;
@@ -56,7 +70,7 @@ bool Client::initialize_tls()
 bool Client::mqtt_connect()
 {
     ClientCoreState::ApplicationDisconnectCallbackPtr disconnect_handler_ptr =
-        std::bind(&Client::DisconnectCallback, this, std::placeholders::_1, std::placeholders::_2);
+        std::bind(&Client::disconnect_callback, this, std::placeholders::_1, std::placeholders::_2);
 
     _iot_client_ptr = std::shared_ptr<MqttClient>(MqttClient::Create(_network_connection_ptr,
                 chrono::milliseconds(_param.aws_iot_mqtt_command_timeout()),
@@ -83,7 +97,54 @@ bool Client::mqtt_connect()
     return true;
 }
 
-ResponseCode Client::DisconnectCallback(string client_id,
+bool Client::subscribe()
+{
+    util::String p_topic_name_str = RFID_READER_TOPIC;
+    std::unique_ptr<Utf8String> p_topic_name = Utf8String::Create(p_topic_name_str);
+    mqtt::Subscription::ApplicationCallbackHandlerPtr p_sub_handler = std::bind(&Client::subscribe_callback,
+                                                                                this,
+                                                                                std::placeholders::_1,
+                                                                                std::placeholders::_2,
+                                                                                std::placeholders::_3);
+    std::shared_ptr<mqtt::Subscription> p_subscription =
+        mqtt::Subscription::Create(std::move(p_topic_name), mqtt::QoS::QOS0, p_sub_handler, nullptr);
+    util::Vector<std::shared_ptr<mqtt::Subscription>> topic_vector;
+    topic_vector.push_back(p_subscription);
+
+    ResponseCode rc = _iot_client_ptr->Subscribe(topic_vector,
+            chrono::milliseconds(_param.aws_iot_mqtt_command_timeout()));
+    std::this_thread::sleep_for(std::chrono::seconds(3));
+    return rc == ResponseCode::SUCCESS;
+}
+
+bool Client::unsubscribe()
+{
+    util::String p_topic_name_str = RFID_READER_TOPIC;
+    std::unique_ptr<Utf8String> p_topic_name = Utf8String::Create(p_topic_name_str);
+    util::Vector<std::unique_ptr<Utf8String>> topic_vector;
+    topic_vector.push_back(std::move(p_topic_name));
+
+    ResponseCode rc = _iot_client_ptr->Unsubscribe(std::move(topic_vector),
+            chrono::milliseconds(_param.aws_iot_mqtt_alive_timeout()));
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    return rc == ResponseCode::SUCCESS;
+}
+
+ResponseCode Client::subscribe_callback(util::String topic_name,
+        util::String payload,
+        std::shared_ptr<mqtt::SubscriptionHandlerContextData> app_handler_data_ptr) {
+    boost::ignore_unused(app_handler_data_ptr);
+    std::cout << std::endl << "************" << std::endl;
+    std::cout << "Received message on topic : " << topic_name << std::endl;
+    std::cout << "Payload Length : " << payload.length() << std::endl;
+    if (payload.length() < 50) {
+        std::cout << "Payload : " << payload << std::endl;
+    }
+    std::cout << std::endl << "************" << std::endl;
+    return ResponseCode::SUCCESS;
+}
+
+ResponseCode Client::disconnect_callback(string client_id,
     std::shared_ptr<DisconnectCallbackContextData> app_handler_data_ptr)
 {
     boost::ignore_unused(app_handler_data_ptr);

@@ -9,8 +9,6 @@ using namespace std;
 TEST_GROUP(aws_iot_client_group)
 {
     const string conf_file = "../conf/retail_rfid_reader_gateway.conf";
-    bool tls_init_succ = true;
-    bool mqtt_connected = true;
     void setup()
     {
     }
@@ -33,11 +31,25 @@ TEST(aws_iot_client_group, should_init_config_success_when_given_correct_paramet
     Client *client = new ClientMock(param);
     mock().expectOneCall("initialize_tls")
         .onObject(client)
-        .andReturnValue((bool)tls_init_succ);
+        .andReturnValue(true);
     mock().expectOneCall("mqtt_connect")
         .onObject(client)
-        .andReturnValue((bool)mqtt_connected);
+        .andReturnValue(true);
+    mock().expectOneCall("subscribe")
+        .onObject(client)
+        .andReturnValue(true);
     client->connect();
     mock().checkExpectations();
     delete client;
 }
+
+TEST(aws_iot_client_group, should_unsubscribe_when_disconnect_called)
+{
+    Parameters param(conf_file);
+    Client *client = new ClientMock(param);
+    mock().expectNoCall("unsubscribe");
+    client->disconnect();
+    mock().checkExpectations();
+    delete client;
+}
+

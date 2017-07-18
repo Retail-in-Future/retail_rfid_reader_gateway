@@ -13,19 +13,20 @@ class Client
         Client(const Parameters &param);
         virtual ~Client();
         bool connect();
+        void disconnect();
         void run();
         bool publish(const string &payload);
         void stop();
 
     private:
         ResponseCode RunPublish(int msg_count);
-        ResponseCode SubscribeCallback(util::String topic_name,
+        ResponseCode subscribe_callback(util::String topic_name,
                 util::String payload,
-                std::shared_ptr<mqtt::SubscriptionHandlerContextData> p_app_handler_data);
-        ResponseCode DisconnectCallback(string client_id,
+                std::shared_ptr<mqtt::SubscriptionHandlerContextData> app_handler_data_ptr);
+        ResponseCode disconnect_callback(string client_id,
                 std::shared_ptr<DisconnectCallbackContextData> app_handler_data_ptr);
-        ResponseCode Subscribe();
-        ResponseCode Unsubscribe();
+        virtual bool subscribe();
+        virtual bool unsubscribe();
         virtual bool initialize_tls();
         virtual bool mqtt_connect();
 
