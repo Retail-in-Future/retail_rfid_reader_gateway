@@ -1,15 +1,20 @@
 #include <iostream>
-#include <util/logging/Logging.hpp>
-#include <util/logging/LogMacros.hpp>
-#include <util/logging/ConsoleLogSystem.hpp>
 #include <boost/smart_ptr.hpp>
+#include <boost/asio.hpp>
 #include "parameters/options.hpp"
 #include "parameters/parameters.hpp"
 #include "aws_iot/client.hpp"
 
 using namespace std;
 using namespace boost;
-//using namespace awsiotsdk::util::Logging;
+using namespace boost::asio;
+
+io_service service;
+void signals_handler(const system::error_code &error, int signal_number)
+{
+    cout << "signal handler..." << endl;    
+    service.stop();
+}
 
 boost::shared_ptr<Parameters> process_parameters(Options &options)
 {
@@ -28,14 +33,15 @@ boost::shared_ptr<Parameters> process_parameters(Options &options)
 
 int main(int argc, char *argv[])
 {
+    signal_set signals(service, SIGINT, SIGTERM);
+#ifdef SIGQUIT
+    signals.add(SIGQUIT);
+#endif
+    signals.async_wait(bind(signals_handler, _1, _2));
     Options options(argc, (char const **)argv);
     auto param = process_parameters(options);
     Client client(*param);
     client.connect();
-    //std::shared_ptr<ConsoleLogSystem> p_log_system =
-        //std::make_shared<ConsoleLogSystem>(LogLevel::Info);
-    //InitializeAWSLogging(p_log_system);
-    //p_log_system->Log(LogLevel::Info, "test", "test");
-    //ShutdownAWSLogging();
+    service.run();
     return 0;
 }
