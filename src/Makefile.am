@@ -39,11 +39,13 @@ libretail_rfid_reader_gateway_la_LDFLAGS = $(AM_LDFLAGS)
 libretail_rfid_reader_gateway_la_LDFLAGS += $(AWS_IOT_LDFLAGS) 
 libretail_rfid_reader_gateway_la_LDFLAGS += $(BOOST_PROGRAM_OPTIONS_LDFLAGS)
 libretail_rfid_reader_gateway_la_LDFLAGS += $(BOOST_SYSTEM_LDFLAGS)
+libretail_rfid_reader_gateway_la_LDFLAGS += $(BOOST_THREAD_LDFLAGS)
 
 libretail_rfid_reader_gateway_la_LIBADD = $(DEPENDENCIES_LIBS)
 libretail_rfid_reader_gateway_la_LIBADD += $(AWS_IOT_LIBS)
 libretail_rfid_reader_gateway_la_LIBADD += $(BOOST_PROGRAM_OPTIONS_LIBS)
 libretail_rfid_reader_gateway_la_LIBADD += $(BOOST_SYSTEM_LIBS)
+libretail_rfid_reader_gateway_la_LIBADD += $(BOOST_THREAD_LIBS)
 
 libretail_rfid_reader_gateway_la_include_HEADERS = \
 	retail_rfid_reader_gateway.h
@@ -76,11 +78,13 @@ retail_rfid_reader_gateway_LDFLAGS = $(AM_LDFLAGS)
 retail_rfid_reader_gateway_LDFLAGS += $(AWS_IOT_LDFLAGS)
 retail_rfid_reader_gateway_LDFLAGS += $(BOOST_PROGRAM_OPTIONS_LDFLAGS)
 retail_rfid_reader_gateway_LDFLAGS += $(BOOST_SYSTEM_LDFLAGS)
+retail_rfid_reader_gateway_LDFLAGS += $(BOOST_THREAD_LDFLAGS)
 
 retail_rfid_reader_gateway_LDADD = $(DEPENDENCIES_LIBS)
 retail_rfid_reader_gateway_LDADD += $(AWS_IOT_LIBS)
 retail_rfid_reader_gateway_LDADD += $(BOOST_PROGRAM_OPTIONS_LIBS)
 retail_rfid_reader_gateway_LDADD += $(BOOST_SYSTEM_LIBS)
+retail_rfid_reader_gateway_LDADD += $(BOOST_THREAD_LIBS)
 
 if ENABLE_TESTS
 if ENABLE_COVERAGE

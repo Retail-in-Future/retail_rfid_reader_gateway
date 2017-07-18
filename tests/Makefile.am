@@ -23,7 +23,8 @@ retail_rfid_reader_gateway_tests_SOURCES = \
 	parameters/parameters_tests.cpp \
 	parameters/options_tests.cpp \
 	aws_iot/client_mock.cpp \
-	aws_iot/client_tests.cpp
+	aws_iot/client_tests.cpp \
+	rfid_reader/rfid_reader_tests.cpp
 
 retail_rfid_reader_gateway_tests_CFLAGS = $(AM_CFLAGS)
 

@@ -16,6 +16,7 @@ LT_INIT
 BOOST_REQUIRE
 BOOST_PROGRAM_OPTIONS
 BOOST_SYSTEM
+BOOST_THREAD
 PKG_CHECK_MODULES(DEPENDENCIES, [openssl])
 AC_CONFIG_LINKS([conf/retail_rfid_reader_gateway.conf:conf/retail_rfid_reader_gateway.conf])
 AC_CONFIG_LINKS([certs/root-ca:certs/root-ca])

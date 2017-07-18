@@ -1,6 +1,7 @@
 #include <iostream>
 #include <boost/smart_ptr.hpp>
 #include <boost/asio.hpp>
+#include <boost/thread.hpp>
 #include "parameters/options.hpp"
 #include "parameters/parameters.hpp"
 #include "aws_iot/client.hpp"
@@ -42,6 +43,16 @@ int main(int argc, char *argv[])
     auto param = process_parameters(options);
     Client client(*param);
     client.connect();
-    service.run();
+    try {
+        //RfidReader rfid_reader(service, *param, client);
+        boost::thread t(bind(&io_service::run, &service));
+        //while (rfid_reader.active()) {
+            sleep(1);
+        //}
+        //rfid_reader.close();
+        t.join();
+    } catch (std::exception &e) {
+        cerr << "Exception: " << e.what() << endl;
+    }
     return 0;
 }
