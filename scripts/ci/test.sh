@@ -57,7 +57,6 @@ pushd $topdir
 
 app_name=$(basename $(pwd))
 docker_image_id=`echo "local/${app_name}:latest" | tr "[:upper:]" "[:lower:]"`
-docker build -t $docker_image_id -f dockers/fedora25-x86_64-Dockerfile .
 
 mkdir -p $build_dir
 rm -fr $build_dir/*
