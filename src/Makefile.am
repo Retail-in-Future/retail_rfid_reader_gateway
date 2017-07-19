@@ -25,7 +25,8 @@ libretail_rfid_reader_gateway_la_SOURCES = \
 	parameters/parameters.cpp \
 	parameters/options.cpp \
 	aws_iot/client.cpp \
-	aws_iot/OpenSSLConnection.cpp
+	aws_iot/OpenSSLConnection.cpp \
+	rfid_reader/rs232_data_channel.cpp
 
 libretail_rfid_reader_gateway_la_CFLAGS = $(AM_CFLAGS)
 
@@ -64,7 +65,8 @@ retail_rfid_reader_gateway_SOURCES = \
 	parameters/parameters.cpp \
 	parameters/options.cpp \
 	aws_iot/client.cpp \
-	aws_iot/OpenSSLConnection.cpp
+	aws_iot/OpenSSLConnection.cpp \
+	rfid_reader/rs232_data_channel.cpp
 
 retail_rfid_reader_gateway_CFLAGS = $(AM_CFLAGS)
 
