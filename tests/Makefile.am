@@ -9,7 +9,8 @@ AM_CPPFLAGS = \
 	$(CPPUTEST_CFLAGS)\
 	$(PRODUCTION_CODE_INCLUDES)
 
-AM_CFLAGS =	-Werror\
+AM_CFLAGS =	
+	-Werror\
 	-Wall\
 	-g
 
