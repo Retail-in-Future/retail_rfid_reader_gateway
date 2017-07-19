@@ -13,6 +13,7 @@ using namespace boost::asio;
 io_service service;
 void signals_handler(const system::error_code &error, int signal_number)
 {
+    ignore_unused(error, signal_number);
     cout << "signal handler..." << endl;    
     service.stop();
 }
