@@ -1,16 +1,5 @@
 #!/bin/bash
 #
-# SCRIPT: build 
-# AUTHOR: Tang Cheng
-# DATE:   2017/07/17
-# REV:    1.0.D (Valid are A, B, D, T, Q, and P)
-#               (For Alpha, Beta, Dev, Test, QA, and Production)
-#
-# PLATFORM: Linux
-#
-# PURPOSE: Build a project managed with autoconf toolset.
-# 
-#
 # set -n   # Uncomment to check script syntax, without execution.
 #          # NOTE: Do not forget to put the # comment back in or
 #          #       the shell script will never execute!
@@ -53,7 +42,7 @@ case $# in
 	;;
 esac
 
-pushd $topdir
+pushd $top_dir
 
 app_name=$(basename $(pwd))
 docker_image_id=`echo "local/${app_name}:latest" | tr "[:upper:]" "[:lower:]"`
@@ -88,6 +77,6 @@ set -o errexit -o nounset \
 EOF
 fi
 
-#popd
+popd
 
 # End of script
