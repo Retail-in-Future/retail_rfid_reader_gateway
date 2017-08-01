@@ -11,6 +11,7 @@ The gateway between device of rfid and AWS IoT cloud.
 * autoconf
 * automake
 * libtool
+* pkg-config
 * boost > 1.6.0
 * aws iot device sdk for c++
 * pthread
